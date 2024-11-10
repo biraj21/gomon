@@ -179,7 +179,10 @@ func main() {
 			Flags: syscall.EV_ADD | syscall.EV_CLEAR,
 
 			// Filter-specific flags. - notify on write
-			Fflags: syscall.NOTE_WRITE, // NOTE_WRITE: A write occurred on the file referenced by the descriptor.
+			// NOTE_WRITE: A write occurred on the file referenced by the descriptor.
+			// NOTE_RENAME: The file referenced by the descriptor was renamed.
+			// NOTE_DELETE: The unlink() system call was called on the file referenced by the descriptor
+			Fflags: syscall.NOTE_WRITE | syscall.NOTE_RENAME,
 
 			Udata: nil,
 		}
