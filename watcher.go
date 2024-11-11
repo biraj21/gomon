@@ -12,7 +12,5 @@ func Watch(dir string, onChange func()) {
 		log.Fatalf("error getting all Go files in directory: %v", err)
 	}
 
-	onChange()
-
 	watch(files, onChange)
 }
