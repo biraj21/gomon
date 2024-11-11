@@ -18,7 +18,7 @@ type ProcessManager struct {
 }
 
 // runs a go run command
-func (pm *ProcessManager) runProcess(filename string) {
+func (pm *ProcessManager) RunProcess(filename string) {
 	pm.mutex.Lock()
 	defer pm.mutex.Unlock()
 
@@ -61,7 +61,7 @@ func (pm *ProcessManager) runProcess(filename string) {
 }
 
 // stops the process
-func (pm *ProcessManager) stopProcess() {
+func (pm *ProcessManager) StopProcess() {
 	pm.mutex.Lock()
 	defer pm.mutex.Unlock()
 

@@ -67,16 +67,16 @@ func main() {
 	go func() {
 		sig := <-signals
 		log.Printf("received signal: %v\n", sig)
-		manager.stopProcess()
+		manager.StopProcess()
 		os.Exit(0)
 	}()
 
-	manager.runProcess(filename)
+	manager.RunProcess(filename)
 
-	watchWrapper(dir, func() {
+	Watch(dir, func() {
 		log.Println()
 		log.Println("restarting due to changes...")
-		manager.stopProcess()
-		manager.runProcess(filename)
+		manager.StopProcess()
+		manager.RunProcess(filename)
 	})
 }
