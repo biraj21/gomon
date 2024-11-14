@@ -2,7 +2,10 @@
 
 A simple Go program that watches Go files in a directory and restarts the program when a change is detected. It runs the `go run` command to start the program.
 
-It only works on macOS (and maybe even BSD but I haven't tested it) because it uses macOS's built-in `kqueue()` and `kevent()` system calls. You can read [Apple's docs](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/kqueue.2.html) about them.
+It only works on macOS and linux, and maybe even BSD but I haven't tested it.
+
+- macOS: uses macOS's built-in `kqueue()` and `kevent()` system calls. You can read [Apple's docs](https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/kqueue.2.html) about them.
+- linux: uses linux's `inotify` API. You can read [Linux man pages](https://man7.org/linux/man-pages/man7/inotify.7.html) about it.
 
 This is not a production-ready program. It's just a fun project to learn about kqueue and kevent.
 

@@ -8,7 +8,12 @@ import (
 	"syscall"
 )
 
-func watch(files []string, onChange func()) {
+func watch(dir string, onChange func()) {
+	files, err := getAllFiles(dir, ".go")
+	if err != nil {
+		log.Fatalf("error getting all Go files in directory: %v", err)
+	}
+
 	// create a new kernel event queue & get a descriptor
 	// The kqueue() system call provides a generic method of notifying the user
 	// when an kernel event (kevent) happens or a condition holds
@@ -47,7 +52,7 @@ func watch(files []string, onChange func()) {
 			// NOTE_WRITE: A write occurred on the file referenced by the descriptor.
 			// NOTE_RENAME: The file referenced by the descriptor was renamed.
 			// NOTE_DELETE: The unlink() system call was called on the file referenced by the descriptor
-			Fflags: syscall.NOTE_WRITE | syscall.NOTE_RENAME,
+			Fflags: syscall.NOTE_WRITE | syscall.NOTE_RENAME | syscall.NOTE_DELETE,
 
 			Udata: nil,
 		}
