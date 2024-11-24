@@ -18,7 +18,7 @@ type ProcessManager struct {
 }
 
 // runs a go run command
-func (pm *ProcessManager) RunProcess(filename string) {
+func (pm *ProcessManager) RunProcess(filename string, programArgs []string) {
 	pm.mutex.Lock()
 	defer pm.mutex.Unlock()
 
@@ -26,6 +26,7 @@ func (pm *ProcessManager) RunProcess(filename string) {
 	pm.waitDone = make(chan struct{})
 
 	command := []string{"go", "run", filename}
+	command = append(command, programArgs...)
 
 	log.Printf("Running `%s`", strings.Join(command, " "))
 

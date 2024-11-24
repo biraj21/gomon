@@ -71,12 +71,13 @@ func main() {
 		os.Exit(0)
 	}()
 
-	manager.RunProcess(filename)
+	programArgs := flag.Args()[1:] // pass rest of args to program
+	manager.RunProcess(filename, programArgs)
 
 	Watch(dir, func() {
 		log.Println()
 		log.Println("restarting due to changes...")
 		manager.StopProcess()
-		manager.RunProcess(filename)
+		manager.RunProcess(filename, programArgs)
 	})
 }
