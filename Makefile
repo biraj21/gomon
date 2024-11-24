@@ -1,7 +1,11 @@
 bin := gomon
 install_dir := /usr/local/bin
 
-build:
+source_files := $(shell find . -name '*.go')
+
+build: $(bin)
+
+$(bin): $(source_files)
 	go build -o $(bin)
 
 install: $(bin)
