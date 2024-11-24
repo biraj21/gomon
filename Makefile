@@ -9,6 +9,8 @@ install: $(bin)
 	sudo cp $(bin) $(install_dir)
 	echo "Done!"
 
+update: build install
+
 uninstall:
 	echo "Uninstalling $(bin) from $(install_dir)..."
 	sudo rm $(install_dir)/$(bin)
